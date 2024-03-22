@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonButton,
@@ -31,21 +31,43 @@ import {
       IonItem,
       IonLabel,
       CommonModule,
-      FormsModule
+      FormsModule,
+      ReactiveFormsModule
     ]
   })
   export class LoginPage {
     username: string = '';
     password: string = '';
+    loginAttempts: number = 0;
+
+    loginForm = new FormGroup({
+      username: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(5)])
+    })
 
     constructor(private router: Router) { }
 
     login() {
-      if (this.username === 'admin' && this.password === 'admin') {
-        this.router.navigateByUrl('/home');
+      this.loginAttempts++;
+
+      // Could add a timer here to lock the user out for a period of time
+      // this is just to demonstrate different edge cases
+      if (this.loginAttempts > 3) {
+        alert('Too many failed login attempts. Please try again later.');
+        return;
+      }
+
+      if (this.loginForm.valid) {
+        const { username, password } = this.loginForm.value;
+        if (username === 'admin' && password === 'admin') {
+          this.router.navigateByUrl('/home');
+          this.loginForm.reset();
+          this.loginAttempts = 0;
+        } else {
+          alert('Invalid credentials');
+        }
       } else {
-        alert('Invalid credentials');
+        alert('Please check your input');
       }
     }
-
   };

@@ -1,0 +1,7 @@
+{
+  "name": "d24",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

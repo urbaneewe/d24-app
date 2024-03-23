@@ -9,9 +9,11 @@
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
 
+#API key protection
+.env
+
 *.log
 log.txt
-
 
 /.sourcemaps
 /.versions
@@ -51,7 +53,6 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
-
 
 # Miscellaneous
 /.angular

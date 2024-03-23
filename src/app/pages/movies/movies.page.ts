@@ -1,13 +1,17 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {
+  AlertController,
   InfiniteScrollCustomEvent,
   IonAlert,
   IonAvatar,
   IonBadge,
+  IonButton,
+  IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   IonItem,
@@ -18,6 +22,9 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { logOutOutline } from 'ionicons/icons';
 import { catchError, finalize } from 'rxjs';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -27,6 +34,9 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['movies.page.scss'],
   standalone: true,
   imports: [
+    IonButtons,
+    IonButton,
+    IonIcon,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -57,6 +67,10 @@ export class MoviesPage implements OnInit {
   // Placeholder array for the initial load
   public placeholderArray = new Array(10);
 
+  constructor(private router: Router, private alertController: AlertController) {
+    addIcons({ logOutOutline });
+  }
+
   ngOnInit() {
     this.loadMovies();
   }
@@ -69,7 +83,6 @@ export class MoviesPage implements OnInit {
       this.isLoading = true;
     }
 
-    // Get the next page of movies from the MovieService
     const movieService: MovieService = this.movieService;
     movieService
       .getTopRatedMovies(this.currentPage)
@@ -100,5 +113,33 @@ export class MoviesPage implements OnInit {
   loadMore(event: InfiniteScrollCustomEvent) {
     this.currentPage++;
     this.loadMovies(event);
+  }
+
+async presentLogoutAlert() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Logout',
+      message: 'Do you really want to log out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Logout canceled');
+          },
+        },
+        {
+          text: 'Logout',
+          handler: () => {
+            this.logout();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  logout() {
+    this.router.navigateByUrl('/login');
   }
 }

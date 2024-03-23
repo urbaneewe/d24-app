@@ -2,9 +2,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import {
   Component,
   Input,
-  WritableSignal,
-  inject,
-  signal
+  inject
 } from '@angular/core';
 import {
   IonBackButton,
@@ -55,20 +53,13 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieDetailPage {
   private movieService = inject(MovieService);
-  public movie: WritableSignal<MovieResult | null> = signal<MovieResult | null>(
-    null,
-  );
-  //* And this is how you can use a regular variable
-  // public movie: MovieResult | null = null;
+  public movie: MovieResult | null = null;
   public imageBaseUrl = 'https://image.tmdb.org/t/p';
 
   @Input()
   set id(movieId: string) {
-    // This is just to show Signal usage
     this.movieService.getMovieDetails(movieId).subscribe((movie) => {
-      this.movie.set(movie);
-      //* Instead of using Signal, you can just use a regular variable
-      // this.movie = movie;
+      this.movie = movie;
     });
   }
 

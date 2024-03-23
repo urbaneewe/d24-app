@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Movies</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="presentLogoutAlert()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Top Movies</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -22,14 +27,14 @@
 
   <ion-list class="ion-padding-top">
     @for (item of movies; track item.id) {
-    <ion-item button [routerLink]="['/details', item.id]">
+    <ion-item button [routerLink]="['/movie-detail', item.id]">
       <ion-avatar slot="start">
         <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
       </ion-avatar>
 
       <ion-label class="ion-text-wrap">
         <h3>{{ item.title }}</h3>
-        <p>{{ item.release_date | date:'y' }}</p>
+        <p>{{ item.release_date | date:'d/y' }}</p>
       </ion-label>
 
       <ion-badge slot="end"> {{ item.vote_average }} </ion-badge>

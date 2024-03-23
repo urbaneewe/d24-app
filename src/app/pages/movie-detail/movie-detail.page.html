@@ -3,18 +3,18 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ movie()?.title }}</ion-title>
+    <ion-title>{{ movie?.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  @if (movie(); as movie) {
+  @if (movie) {
   <ion-card>
-    <div [style.height.px]="300" [style.background-image]="'url(' + imageBaseUrl + '/w400' + movie?.poster_path + ')'">
+    <div [style.height.px]="300" [style.background-image]="'url(' + imageBaseUrl + '/w400' + movie.poster_path + ')'">
     </div>
 
     <ion-card-header>
-      <ion-card-title> {{ movie?.title }} </ion-card-title>
+      <ion-card-title> {{ movie.title }} </ion-card-title>
       <ion-card-subtitle> {{ movie.tagline }} </ion-card-subtitle>
       <ion-text color="tertiary">
         @for (g of movie.genres; track g.id; let isLast = $last;) {
@@ -27,7 +27,7 @@
 
       <ion-item lines="none">
         <ion-icon name="calendar-outline" slot="start"></ion-icon>
-        <ion-label>{{ movie.release_date | date: 'y'}}</ion-label>
+        <ion-label>{{ movie.release_date | date: 'd/y'}}</ion-label>
       </ion-item>
 
       <ion-item lines="none">

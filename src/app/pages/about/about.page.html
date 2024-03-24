@@ -1,13 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>about</ion-title>
+    <ion-title>About me</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">about</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="photo-container">
+    <ion-avatar class="profile-photo">
+      <img src="assets/img/profile.png" alt="Profile photo" />
+    </ion-avatar>
+  </div>
+
+  <div class="about-text-container">
+    <ion-text color="dark">
+      <h2>A bit about myself</h2>
+      <p>
+        Hi there! I'm Mihajlo, the creator of this app.
+        I am a software engineer based in Novi Sad, always looking to improve
+        myself and expand my knowledge. When not immersed in code, you'll find
+        me spending time with friends and family, or training at the gym.
+      </p>
+    </ion-text>
+  </div>
 </ion-content>

@@ -9,12 +9,12 @@ import {
   IonTabs
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { filmOutline, informationCircleOutline } from 'ionicons/icons';
+import { informationCircleOutline, listOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
-  styleUrls: ['./tabs.page.scss'],
+  styleUrls: ['./tabs.page.html'],
   standalone: true,
   imports: [
     IonTabBar,
@@ -29,7 +29,7 @@ import { filmOutline, informationCircleOutline } from 'ionicons/icons';
 export class TabsPage {
 
   constructor(private routerOutlet: IonRouterOutlet) {
-    addIcons({ filmOutline, informationCircleOutline });
+    addIcons({ listOutline, informationCircleOutline });
   }
 
     ionViewDidEnter() {

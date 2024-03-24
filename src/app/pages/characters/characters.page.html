@@ -5,7 +5,7 @@
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Top Movies</ion-title>
+    <ion-title>Characters</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,24 +26,24 @@
   }
 
   <ion-list class="ion-padding-top">
-    @for (item of movies; track item.id) {
-    <ion-item button [routerLink]="['/movie-detail', item.id]">
+    @for (item of characters; track item.id) {
+    <ion-item button [routerLink]="['/character-detail', item.id]">
       <ion-avatar slot="start">
-        <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
+        <img [src]="imageBaseUrl + item.id + '.jpeg'" />
       </ion-avatar>
 
       <ion-label class="ion-text-wrap">
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.release_date | date:'d/y' }}</p>
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.species }}</p>
       </ion-label>
 
-      <ion-badge slot="end"> {{ item.vote_average }} </ion-badge>
+      <ion-badge slot="end"> {{ item.status }} </ion-badge>
     </ion-item>
     }
     @empty {
       @if (!isLoading) {
         <ion-item lines="none">
-          <ion-label class="ion-text-center">No movies found</ion-label>
+          <ion-label class="ion-text-center">No characters found</ion-label>
         </ion-item>
       }
     }

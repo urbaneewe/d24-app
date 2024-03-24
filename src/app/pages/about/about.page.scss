@@ -6,13 +6,13 @@
 
 .profile-photo {
   --border-radius: 50%;
-  width: 50%; // This will make the image take up half the width of the container
+  width: 50%;
   height: 150px;
 }
 
 .about-text-container {
   margin: 20px;
-  text-align: justify; // Centers the text on the page
+  text-align: justify;
   h2 {
       font-weight: bold;
     }

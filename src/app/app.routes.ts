@@ -15,8 +15,8 @@ export const routes: Routes = [
     loadComponent: () => import('./tabs/tabs.page').then(m => m.TabsPage),
     children: [
       {
-        path: 'movies',
-        loadComponent: () => import('./pages/movies/movies.page').then(m => m.MoviesPage),
+        path: 'characters',
+        loadComponent: () => import('./pages/characters/characters.page').then(m => m.CharactersPage),
       },
       {
         path: 'about',
@@ -24,22 +24,18 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'movies',
+        redirectTo: 'characters',
         pathMatch: 'full',
       },
     ],
   },
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    path: 'character-detail/:id',
+    loadComponent: () => import('./pages/character-detail/character-detail.page').then( m => m.CharacterDetailPage)
   },
   {
-    path: 'movie-detail/:id',
-    loadComponent: () => import('./pages/movie-detail/movie-detail.page').then( m => m.MovieDetailPage)
-  },
-  {
-    path: 'movies',
-    loadComponent: () => import('./pages/movies/movies.page').then( m => m.MoviesPage)
+    path: 'characters',
+    loadComponent: () => import('./pages/characters/characters.page').then( m => m.CharactersPage)
   },
   {
     path: 'tabs',

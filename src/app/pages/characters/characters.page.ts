@@ -27,12 +27,12 @@ import {
 import { addIcons } from 'ionicons';
 import { logOutOutline } from 'ionicons/icons';
 import { catchError, finalize } from 'rxjs';
-import { MovieService } from 'src/app/services/movie.service';
+import { CharacterService } from 'src/app/services/character.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'movies.page.html',
-  styleUrls: ['movies.page.scss'],
+  templateUrl: 'characters.page.html',
+  styleUrls: ['characters.page.html'],
   standalone: true,
   imports: [
     IonRouterOutlet,
@@ -57,27 +57,27 @@ import { MovieService } from 'src/app/services/movie.service';
     RouterModule,
   ],
 })
-export class MoviesPage implements OnInit {
-  private movieService = inject(MovieService);
+export class CharactersPage implements OnInit {
+  private characterService = inject(CharacterService);
 
   private currentPage = 1;
-  public movies: any[] = [];
-  public imageBaseUrl = 'https://image.tmdb.org/t/p';
+  public characters: any[] = [];
+  public imageBaseUrl = 'https://rickandmortyapi.com/api/character/avatar/';
   public isLoading = true;
   public error = null;
 
   // Placeholder array for the initial load
   public placeholderArray = new Array(10);
 
-  constructor(private router: Router, private alertController: AlertController, private routerOutlet: IonRouterOutlet) {
+  constructor(private router: Router, private alertController: AlertController) {
     addIcons({ logOutOutline });
   }
 
   ngOnInit() {
-    this.loadMovies();
+    this.loadCharacters();
   }
 
-  async loadMovies(event?: InfiniteScrollCustomEvent) {
+  async loadCharacters(event?: InfiniteScrollCustomEvent) {
     this.error = null;
 
     // Only show loading indicator on initial load
@@ -85,9 +85,9 @@ export class MoviesPage implements OnInit {
       this.isLoading = true;
     }
 
-    const movieService: MovieService = this.movieService;
-    movieService
-      .getTopRatedMovies(this.currentPage)
+    const characterService: CharacterService = this.characterService;
+    characterService
+      .getCharacters(this.currentPage)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -99,7 +99,7 @@ export class MoviesPage implements OnInit {
       )
       .subscribe({
         next: (res: any) => {
-          this.movies.push(...res.results);
+          this.characters.push(...res.results);
 
           // Resolve the infinite scroll promise
           event?.target.complete();
@@ -114,7 +114,7 @@ export class MoviesPage implements OnInit {
 
   loadMore(event: InfiniteScrollCustomEvent) {
     this.currentPage++;
-    this.loadMovies(event);
+    this.loadCharacters(event);
   }
 
 async presentLogoutAlert() {

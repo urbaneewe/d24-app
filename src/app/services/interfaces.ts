@@ -1,57 +1,31 @@
 export interface ApiResult {
-  page: number;
-  results: any[];
-  total_pages: number;
-  total_results: number;
+  info: Info;
+  results: Result[];
 }
 
-export interface MovieResult {
-  adult: boolean;
-  backdrop_path: string;
-  belongs_to_collection?: any;
-  budget: number;
-  genres: Genre[];
-  homepage: string;
+export interface Result {
   id: number;
-  imdb_id: string;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  production_companies: ProductionCompany[];
-  production_countries: ProductionCountry[];
-  release_date: string;
-  revenue: number;
-  runtime: number;
-  spoken_languages: SpokenLanguage[];
+  name: string;
   status: string;
-  tagline: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
+  species: string;
+  type: string;
+  gender: string;
+  origin: Origin;
+  location: Origin;
+  image: string;
+  episode: string[];
+  url: string;
+  created: string;
 }
 
-interface SpokenLanguage {
-  english_name: string;
-  iso_639_1: string;
+interface Origin {
   name: string;
+  url: string;
 }
 
-interface ProductionCountry {
-  iso_3166_1: string;
-  name: string;
-}
-
-interface ProductionCompany {
-  id: number;
-  logo_path?: string;
-  name: string;
-  origin_country: string;
-}
-
-interface Genre {
-  id: number;
-  name: string;
+interface Info {
+  count: number;
+  pages: number;
+  next: string;
+  prev?: any;
 }

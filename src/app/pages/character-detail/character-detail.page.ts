@@ -23,13 +23,13 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { calendarOutline, cashOutline } from 'ionicons/icons';
-import { MovieResult } from 'src/app/services/interfaces';
-import { MovieService } from 'src/app/services/movie.service';
+import { CharacterService } from 'src/app/services/character.service';
+import { type Result } from 'src/app/services/interfaces';
 
 @Component({
   selector: 'app-details',
-  templateUrl: './movie-detail.page.html',
-  styleUrls: ['./movie-detail.page.html'],
+  templateUrl: './character-detail.page.html',
+  styleUrls: ['./character-detail.page.html'],
   standalone: true,
   imports: [
     IonHeader,
@@ -51,15 +51,15 @@ import { MovieService } from 'src/app/services/movie.service';
     DatePipe,
   ],
 })
-export class MovieDetailPage {
-  private movieService = inject(MovieService);
-  public movie: MovieResult | null = null;
-  public imageBaseUrl = 'https://image.tmdb.org/t/p';
+export class CharacterDetailPage {
+  private characterService = inject(CharacterService);
+  public character: Result | null = null;
+  public imageBaseUrl = 'https://rickandmortyapi.com/api/character/avatar/';
 
   @Input()
-  set id(movieId: string) {
-    this.movieService.getMovieDetails(movieId).subscribe((movie) => {
-      this.movie = movie;
+  set id(characterId: string) {
+    this.characterService.getCharacterDetails(characterId).subscribe((character) => {
+      this.character = character;
     });
   }
 

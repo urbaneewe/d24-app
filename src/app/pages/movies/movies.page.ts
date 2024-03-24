@@ -77,17 +77,6 @@ export class MoviesPage implements OnInit {
     this.loadMovies();
   }
 
-  ionViewDidEnter() {
-    // Disable swipe to go back to login page since we have a
-    // dedicated logout button
-    this.routerOutlet.swipeGesture = false;
-  }
-
-  ionViewWillLeave() {
-    // Re-enable swipe to go back so that child pages can use it
-    this.routerOutlet.swipeGesture = true;
-  }
-
   async loadMovies(event?: InfiniteScrollCustomEvent) {
     this.error = null;
 

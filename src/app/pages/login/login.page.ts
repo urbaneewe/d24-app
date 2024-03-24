@@ -60,7 +60,7 @@ import {
       if (this.loginForm.valid) {
         const { username, password } = this.loginForm.value;
         if (username === 'admin' && password === 'admin') {
-          this.router.navigateByUrl('/movies');
+          this.router.navigateByUrl('/tabs/movies');
           this.loginForm.reset();
           this.loginAttempts = 0;
         } else {

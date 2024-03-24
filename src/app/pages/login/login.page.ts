@@ -50,7 +50,7 @@ import {
     login() {
       this.loginAttempts++;
 
-      // Could add a timer here to lock the user out for a period of time
+      // Could add a timer here to lock the user out for a period of time,
       // this is just to demonstrate different edge cases
       if (this.loginAttempts > 3) {
         alert('Too many failed login attempts. Please try again later.');

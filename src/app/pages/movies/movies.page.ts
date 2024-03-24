@@ -18,6 +18,7 @@ import {
   IonLabel,
   IonList,
   IonLoading,
+  IonRouterOutlet,
   IonSkeletonText,
   IonTitle,
   IonToolbar,
@@ -34,6 +35,7 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['movies.page.scss'],
   standalone: true,
   imports: [
+    IonRouterOutlet,
     IonButtons,
     IonButton,
     IonIcon,
@@ -67,12 +69,23 @@ export class MoviesPage implements OnInit {
   // Placeholder array for the initial load
   public placeholderArray = new Array(10);
 
-  constructor(private router: Router, private alertController: AlertController) {
+  constructor(private router: Router, private alertController: AlertController, private routerOutlet: IonRouterOutlet) {
     addIcons({ logOutOutline });
   }
 
   ngOnInit() {
     this.loadMovies();
+  }
+
+  ionViewDidEnter() {
+    // Disable swipe to go back to login page since we have a
+    // dedicated logout button
+    this.routerOutlet.swipeGesture = false;
+  }
+
+  ionViewWillLeave() {
+    // Re-enable swipe to go back so that child pages can use it
+    this.routerOutlet.swipeGesture = true;
   }
 
   async loadMovies(event?: InfiniteScrollCustomEvent) {
@@ -123,9 +136,7 @@ async presentLogoutAlert() {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-            console.log('Logout canceled');
-          },
+          handler: () => {},
         },
         {
           text: 'Logout',
